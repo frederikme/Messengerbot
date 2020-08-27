@@ -133,7 +133,8 @@ class MessengerBot:
             try:
                 elements = self.browser.find_elements_by_class_name('_5rpu')
 
-                if MessengerBot.isGroupChat(chatid):
+                # check if it is a groupchat
+                if len(elements) > 1:
                     chatmessage_box = elements[1]
                 else:
                     chatmessage_box = elements[0]
@@ -167,17 +168,9 @@ class MessengerBot:
         return
 
     def isLoggedIn(self):
-        # check if correct chat is already opened
+        # check if chat is already opened
         url = self.browser.current_url
         if "messenger.com/t/" in url:
             return True
         else:
-            return False
-
-    @staticmethod
-    def isGroupChat(id):
-        try:
-            int(id)
-            return True
-        except ValueError:
             return False
