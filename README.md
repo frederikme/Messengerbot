@@ -27,22 +27,17 @@ deactivate
 pip3 install -r requirements.txt
 ```
 ## Make your adjustments in the template.py file
-The template.py file gives much more freedom and features than the graphical user interface (GUI).
+The template.py file gives much more freedom and features than the graphical user interface (GUI). </br>
 
-/* creates instance of bot */
-bot = MessengerBot(email=email, password=pwd)
+/* creates instance of bot */ => bot = MessengerBot(email=email, password=pwd) </br>
 
-/* Open https://www.messenger.com and login */
-bot.login()
+/* Open https://www.messenger.com and login */ => bot.login() </br>
 
-/* To get ids of open chats and log to terminal/cmd */
-bot.getChatIDs()
+/* To get ids of open chats and log to terminal/cmd */ => bot.getChatIDs() </br>
 
-/* To send a message, this can be used in for loops, or read from a file and send every line of the file etc etc*/
-bot.sendMessage(chatid, message)
+/* To send a message */ => bot.sendMessage(chatid, message) </br>
 
-/* To Change the name of the chat */
-bot.changeChatName(chatid, name)
+/* To Change the name of the chat */ => bot.changeChatName(chatid, name) </br>
 
 ## Run the userinterface.py file for a GUI
 ![alt tag](https://user-images.githubusercontent.com/60892381/91411771-1a511700-e849-11ea-8e62-03d464ab8cf5.png)
