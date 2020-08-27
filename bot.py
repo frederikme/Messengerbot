@@ -135,8 +135,10 @@ class MessengerBot:
 
                 # check if it is a groupchat
                 if len(elements) > 1:
+                    # isgroupchat
                     chatmessage_box = elements[1]
                 else:
+                    # is individual 1-to-1 chat
                     chatmessage_box = elements[0]
 
                 chatmessage_box.send_keys(message)

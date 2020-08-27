@@ -1,6 +1,6 @@
 '''
 
-Created by TeetiFM
+Created by Frederikme (TeetiFM)
 
 examples of usage
 
