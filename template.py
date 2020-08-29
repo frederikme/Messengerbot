@@ -4,6 +4,12 @@ Created by Frederikme (TeetiFM)
 
 examples of usage
 
+/* Create instance/object */
+bot = MessengerBot(email="testemail@email.com", password="testpassword")
+
+/* Log in to messenger */
+bot.login()
+
 /* To get ids of open chats */
 bot.getChatIDs()
 
