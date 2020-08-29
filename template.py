@@ -16,11 +16,7 @@ bot.changeChatName(chatid, name)
 '''
 
 from bot import *
-import pyfiglet
 import constants  # remove this import
-import time
-
-hello_banner = pyfiglet.figlet_format("Hello")
 
 # fill in your own email and password with
 # email = "example@email.com", pwd = "password123" and textfile = "filename.txt"
@@ -29,9 +25,6 @@ pwd = constants.PASSWORD
 textfile = constants.TEXTFILE
 
 if __name__ == "__main__":
-
-    print(hello_banner)
-    time.sleep(2)
 
     # creates instance of bot
     bot = MessengerBot(email=email, password=pwd)
@@ -42,7 +35,7 @@ if __name__ == "__main__":
     for (name, id) in bot.getChatIDs():
         print("{:>50}   {:>20}".format(name, id))
     
-    
+    '''
     # opens textfile from the same directory and sends separate chat messages for each line
     file = open(textfile, "r")
     for line in file:
@@ -51,6 +44,7 @@ if __name__ == "__main__":
 
     # changes the name of the chat
     bot.changeChatName(chatid="3719819448058542", name="new name")
+    '''
     
 
     
