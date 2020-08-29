@@ -5,35 +5,43 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
+# for our print statements and layout in terminal/command prompt
+import pyfiglet
+import os
+import time
 
 class MessengerBot:
 
     def __init__(self, email, password):
+        self.logToScreen("Messengerbot", isBanner=True)
+        self.logToScreen("-> Made by Frederikme")
+        self.logToScreen("-----------------------------------\n\n")
 
+        self.logToScreen("Getting ChromeDriver ...")
         self.browser = webdriver.Chrome(ChromeDriverManager().install())
 
         self.email = email
         self.password = password
 
     def loadPage(self, url):
+        self.logToScreen("Loading page %s" % str(url))
         self.browser.get(url)
         # optionally add storage and readability of cookies with pickle
 
     def login(self):
         if self.isLoggedIn():
-            print("is already logged in")
+            self.logToScreen("You are already logged in")
             return
 
         while True:
-            self.browser.get("http://messenger.com/login")
+            self.loadPage("http://messenger.com/login")
 
             # wait for elements to be loaded
             delay = 5
             try:
                 WebDriverWait(self.browser, delay).until(EC.presence_of_element_located((By.NAME, 'email')))
-                print("loaded login")
             except TimeoutException:
-                print("Loading took too much time! Let's try again.")
+                self.logToScreen("Loading took too much time! Let's try again.")
                 continue
 
             try:
@@ -45,13 +53,13 @@ class MessengerBot:
                 passwordInput.send_keys(Keys.ENTER)
 
             except Exception as e:
-                print(e)
+                self.logToScreen(e)
                 continue
             break
 
     def getChat(self, chatid):
         if not self.isLoggedIn():
-            print("need to login first before getting chat")
+            self.logToScreen("Need to login first before getting chat")
             self.login()
 
         # check if correct chat is already opened
@@ -67,29 +75,28 @@ class MessengerBot:
             delay = 5
             try:
                 WebDriverWait(self.browser, delay).until(EC.presence_of_element_located((By.CLASS_NAME, '_5rpb')))
-                print("loaded")
             except TimeoutException:
-                print("Loading took too much time! Let's try again.")
+                self.logToScreen("Loading took too much time! Let's try again.")
                 continue
 
             break
 
     def getChatIDs(self):
         if not self.isLoggedIn():
-            print("need to login first before getting chat")
+            self.logToScreen("need to login first before getting chat")
             self.login()
 
         # gets chats that you see on your left
         while True:
+            self.logToScreen("Fetching your chats and IDs ...")
             names = []
             ids = []
 
             delay = 5
             try:
                 WebDriverWait(self.browser, delay).until(EC.presence_of_all_elements_located((By.XPATH, '//div')))
-                print("loaded")
             except TimeoutException:
-                print("Loading took too much time! Let's try again.")
+                self.logToScreen("Loading took too much time! Let's try again.")
                 continue
 
             attributes = self.browser.find_elements_by_xpath("//div")
@@ -147,7 +154,7 @@ class MessengerBot:
                 break
 
             except TimeoutException:
-                print("Loading took too much time! Let's try again.")
+                self.logToScreen("Loading took too much time! Let's try again.")
                 continue
 
         return
@@ -176,3 +183,17 @@ class MessengerBot:
             return True
         else:
             return False
+
+    def logToScreen(self, text, isBanner=False):
+        if isBanner:
+            # clear the terminal
+            os.system("clear")
+            banner = pyfiglet.figlet_format(text)
+        else:
+            # provide one line space in between
+            print("\n")
+            banner = text
+
+        print(banner)
+        # give time to let the shown message in console sink in
+        time.sleep(1)
