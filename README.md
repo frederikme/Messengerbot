@@ -26,7 +26,7 @@ deactivate
 ```
 pip3 install -r requirements.txt
 ```
-## Make your adjustments in the template.py file
+## Make your adjustments in the quickstart.py file
 The template.py file gives much more freedom and features than the graphical user interface (GUI). </br>
 ```
 # Create instance of messengerbot 
